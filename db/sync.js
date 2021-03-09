@@ -15,4 +15,17 @@ module.exports = async () => {
             age: 23
         })
     }
+
+    if(!await knex.schema.hasTable('users')) {
+        await knex.schema.createTable('users', (table) => {
+            table.increments()
+            table.string('username')
+            table.string('password')
+        })
+        await knex('users').insert({ 
+            username: "jabu", 
+            password: "azerty31",
+        }) 
+    }
+    
 }
